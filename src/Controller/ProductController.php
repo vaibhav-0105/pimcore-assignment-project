@@ -1,5 +1,7 @@
 <?php
 
+//my product controller
+
 namespace App\Controller;
 
 use Pimcore\Controller\FrontendController;
@@ -12,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Pimcore\Model\DataObject;
 use Pimcore\Model\Asset;
 use Pimcore\Model\Asset\Image;
-use Pimcore\Db;
+use Pimcore\Db;   
 
 class ProductController extends FrontendController
 {
