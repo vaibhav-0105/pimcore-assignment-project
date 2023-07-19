@@ -1,0 +1,56 @@
+pimcore: 
+    workflows:
+      product_workflow:
+        label: 'Product Workflow'
+        type: workflow
+        supports:
+          - Pimcore\Model\DataObject\Product
+        initial_markings: created
+        places:
+          created:
+            label: 'Created'
+            color: '#377ea9'
+            permissions:
+              -   condition: "is_fully_authenticated() and 'ROLE_EMPLOYEE' or 'ROLE_ADMIN' in role_names"
+              -   publish: false
+              -   unpublish: true
+          Approval:
+            label: 'Approval'
+            color: '#0C2AAC'
+            permissions:
+              -   condition: "is_fully_authenticated() and 'ROLE_EMPLOYEE' or 'ROLE_ADMIN' in role_names"
+              -   publish: false
+              -   unpublish: true
+          Approved:
+            label: 'Approved'
+            color: '#28a013'
+            permissions:
+              -   condition: "is_fully_authenticated() and 'ROLE_MANAGER' in role_names"
+              -   publish: true
+              -   unpublish: false
+          Rejected:
+            label: 'Rejected'
+            color: '#d41111'
+            permissions:
+              -   condition: "is_fully_authenticated() and 'ROLE_MANAGER' in role_names"
+              -   publish: false
+              -   unpublish: true
+        transitions:
+          Approve:
+            from: created
+            to: Approval
+            guard: "is_granted ('ROLE_EMPLOYEE')  or ('ROLE_ADMIN')"
+            options:
+              label: 'For Approval'
+          Approved:
+            from: Approval
+            to: Approved
+            guard: "is_granted ('ROLE_MANAGER')"
+            options:
+              label: 'Approved'
+          Reject:
+            from: Approval
+            to: Rejected
+            guard: "is_granted ('ROLE_MANAGER')"
+            options:
+              label: 'Rejected'

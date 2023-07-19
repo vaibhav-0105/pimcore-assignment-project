@@ -1,0 +1,35 @@
+_pimcore:
+    resource: "@PimcoreCoreBundle/config/routing.yaml"
+
+app:
+    resource: "../src/Controller/"
+    type: annotation
+
+object_list:
+    path: /listAction
+    controller: App\Controller\ProductController::listAction
+
+add_object:
+    path: /addAction
+    controller: App\Controller\ProductController::addAction
+
+add_product:
+    path: /createAction
+    controller: App\Controller\ProductController::createAction
+
+update_object:
+    path: /updateAction
+    controller: App\Controller\ProductController::updateAction
+
+object_delete:
+    path: /deleteAction
+    controller: App\Controller\ProductController::deleteAction
+
+object_unpublish:
+    path: /unpublishAction
+    controller: App\Controller\ProductController::unpublishAction
+
+object_view:
+    path: /viewAction
+    controller: App\Controller\ProductController::viewAction
+
