@@ -1,7 +1,5 @@
 <?php
 
-//my product controller
-
 namespace App\Controller;
 
 use Pimcore\Controller\FrontendController;
